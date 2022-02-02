@@ -32,25 +32,30 @@ impl Graph {
     }
 }
 
-fn push_fom_values(graph: &mut Graph, x1: u8, y1: u8, ax1: u8, ay1: u8, ax2: u8, ay2: u8) {
+fn push_fom_values(mut graph: Graph, x1: u8, y1: u8, elems: Vec<u8>) -> Graph {
+
+    let mut temp_vec = Vec::new();
+    for index in 0..elems.len() {
+        match index % 2{
+            0 => temp_vec.push( Pair {
+                x: elems[index],
+                y: elems[index + 1]
+            }),
+            _ => println!("")
+        }
+    }
+
     graph.push(Pair {
         x: x1,
         y: y1
-    }, vec!(
-        Pair {
-            x: ax1,
-            y: ay1
-        },
-        Pair {
-            x: ax2,
-            y: ay2
-        }
-    ));
+    }, temp_vec);
+    
+    graph
 }
 
 fn main() {
     let mut new_graph = Graph { graph: HashMap::new() };
-    
+    new_graph = push_fom_values(new_graph, 1, 1, Vec::from([1,2, 2, 1]));
     new_graph.view_map();
 }
 
