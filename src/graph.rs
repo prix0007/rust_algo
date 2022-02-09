@@ -40,10 +40,12 @@ impl Graph {
 
     pub fn view_map(&self) {
         println!("===================");
+        println!("Vertex:");
         for vertex in &self.vertex {
             print!("| {:?} | ", vertex);
         }
         println!("\n--------------------");
+        println!("Edges:");
         for edge in &self.edges {
             print!("| {:?} -> {:?} |\n ", edge.x, edge.y);
         }

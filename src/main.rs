@@ -1,5 +1,5 @@
 mod graph;
-use std::collections::{HashSet, VecDeque};
+use std::{collections::{HashSet, VecDeque}, thread::sleep, time::Duration};
 
 use graph::{Edge, Graph, Pair, Vertex};
 mod init;
@@ -15,6 +15,7 @@ pub fn depth_first_search(graph: &Graph, root: Vertex, objective: Vertex) -> Opt
     let mut history: Vec<Pair> = Vec::new();
     let mut queue = VecDeque::new();
     queue.push_back(root);
+    visited.insert(root);
 
     // While there is an element in the queue
     // get the first element of the vertex queue
@@ -34,6 +35,9 @@ pub fn depth_first_search(graph: &Graph, root: Vertex, objective: Vertex) -> Opt
             if visited.insert(neighbor) {
                 // Add the neighbor on front of queue
                 queue.push_front(neighbor);
+                // println!("Visited: {:?}", visited);
+                // println!("Queue: {:?}", queue);
+                // sleep(Duration::new(2, 0));
             }
         }
     }
@@ -49,9 +53,8 @@ fn main() {
         edges: Vec::new(),
     };
     new_graph = construct_init_graph(new_graph);
-
     new_graph.view_map();
-    println!("=================");
+    
     let sol = depth_first_search(
         &new_graph,
         Vertex {
